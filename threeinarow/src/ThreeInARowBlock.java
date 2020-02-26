@@ -3,10 +3,6 @@
  */
 public class ThreeInARowBlock
 {
-    /**
-     * The game that contains this block
-     */
-    private ThreeInARowGame game;
 
     /**
      * The current value of the contents of this block
@@ -19,25 +15,16 @@ public class ThreeInARowBlock
     private boolean isLegalMove;
 
     /**
-     * Creates a new block that will be contained in the given game.
+     * Creates a new block
      *
-     * @param game The game that will contain the new block
      * @throws IllegalArgumentException When the given game is null
      */
-    public ThreeInARowBlock(ThreeInARowGame game) {
-	super();
-
-	if (game == null) {
-	    throw new IllegalArgumentException("The game must be non-null.");
-	}
-	
-	this.game = game;
-	this.reset();
+    public ThreeInARowBlock() {
+        contents = "";
+        isLegalMove = false;
+        this.reset();
     }
 
-    public ThreeInARowGame getGame() {
-	return this.game;
-    }
 
     /**
      * Sets the contents of this block to the given value.
@@ -46,10 +33,10 @@ public class ThreeInARowBlock
      * @throws IllegalArgumentException When the given value is null
      */
     public void setContents(String value) {
-	if (contents == null) {
-	    throw new IllegalArgumentException("Contents must be non-null.");
-	}
-	this.contents = value;
+        if (value == null) {
+            throw new IllegalArgumentException("Contents must be non-null.");
+        }
+        this.contents = value;
     }
 
     /**
@@ -58,22 +45,22 @@ public class ThreeInARowBlock
      * @return The non-null String value
      */
     public String getContents() {
-	return this.contents;
+        return this.contents;
     }
 
     public void setIsLegalMove(boolean isLegalMove) {
-	this.isLegalMove = isLegalMove;
+        this.isLegalMove = isLegalMove;
     }
 
     public boolean getIsLegalMove() {
-	return this.isLegalMove;
+        return this.isLegalMove;
     }
 
     /**
      * Resets this block before starting a new game.
      */
     public void reset() {
-	this.contents = "";
-	this.isLegalMove = false;
+        this.contents = "";
+        this.isLegalMove = false;
     }
 }

@@ -24,9 +24,4 @@ public class TestExample {
         assertEquals ("1", game.player);
         assertEquals (9, game.movesLeft);
     }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testNewBlockViolatesPrecondition() {
-	ThreeInARowBlock block = new ThreeInARowBlock(null);
-    }
 }
