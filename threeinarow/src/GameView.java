@@ -2,6 +2,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JPanel;
+import java.awt.*;
 
 /**
  * Java implementation of the View component of the ThreeInARowGame
@@ -37,31 +38,28 @@ public class GameView {
         messages.add(playerturn);
         playerturn.setText("Player 1 to play 'X'");
 
-        reset.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                resetGame();
-            }
-        });
-
         // Initialize a JButton for each cell of the 3x3 game board.
         for(int row = 0; row<3; row++) {
-            for(int column = 0; column<3 ;column++) {
-                blocks[row][column] = new JButton();
-                blocks[row][column].setPreferredSize(new Dimension(75,75));
+            for(int col = 0; col<3 ;col++) {
+                blocks[row][col] = new JButton();
+                blocks[row][col].setPreferredSize(new Dimension(75,75));
+                game.add(blocks[row][col]);
             }
         }
     }
 
     /**
-     * Updates the block at the given row and column
+     * Updates the block at the given row and col
      * after one of the player's moves.
      *
      * @param row The row that contains the block
-     * @param column The column that contains the block
+     * @param col The col that contains the block
+     * @param newText The text to update the gameView block object with
+     * @param isLegalMove Whether or not this block is allowing moves into it
      */
-    protected void updateBlock(int row, int column, String newText, boolean isLegalMove) {
-        blocks[row][column].setText(newText);
-        blocks[row][column].setEnabled(isLegalMove);
+    protected void updateBlock(int row, int col, String newText, boolean isLegalMove) {
+        blocks[row][col].setText(newText);
+        blocks[row][col].setEnabled(isLegalMove);
     }
 
     /**
@@ -69,21 +67,35 @@ public class GameView {
      */
     public void endGame() {
         for(int row = 0;row<3;row++) {
-            for(int column = 0;column<3;column++) {
-                blocks[row][column].setEnabled(false);
+            for(int col = 0;col<3;col++) {
+                blocks[row][col].setEnabled(false);
             }
         }
     }
 
     /**
      * Returns the GUI block data
+     *
+     * @return JButton[][]
      */
     public JButton[][] getGuiBlocks() {
         return blocks;
     }
 
     /**
-     * Returns the JButton reset
+     * Returns a JButton block at the given row/col
+     *
+     * @param row The row that contains the block
+     * @param col The col that contains the block
+     * @return JButton
+     */
+    public JButton getGuiBlock(int row, int col) {
+        return blocks[row][col];
+    }
+
+    /**
+     * Returns the reset JButton
+     * @return JButton The Reset JButton
      */
     public JButton getResetButton() {
         return reset;
@@ -91,16 +103,20 @@ public class GameView {
 
     /**
      * Set the Jtextarea playerturn string contents
+     *
+     * @param newText The new text to update the playerturn label with
      */
     public void setPlayerturnText(String newText) {
-        playerturn = newText;
+        playerturn.setText(newText);
     }
 
     /**
      * Set the Jtextarea playerturn string contents
+     *
+     * @param isVisible Sets the visibility of the view
      */
     public void setGuiVisibility(boolean isVisible) {
-        game.gui.setVisible(isVisible);
+        gui.setVisible(isVisible);
     }
 
 }
