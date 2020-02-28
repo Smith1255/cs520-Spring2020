@@ -18,24 +18,27 @@ public class GameController {
 
     private GameModel gameData;
     private GameView gameView;
+    private boolean gameOver;
+    private String winner = GAME_END_NOWINNER;
+
 
     /**
      * The current player taking their turn
      */
-    public String player = "1";
+    public String player;
 
 
     /**
      * Creates a new game initializing the GUI.
      */
     public GameController() {
+        player = "1";
         gameData = new GameModel();
         gameView = new GameView();
 
         for(int row = 0; row<3; row++) {
             for(int col = 0; col<3 ;col++) {
                 gameView.updateBlock(row,col, gameData.getBlockContents(row, col), gameData.isBlockLegalMove(row, col));
-                //game.add(blocks[row][col]);
             }
         }
 
@@ -80,9 +83,11 @@ public class GameController {
                 if(movesLeft<7) {
                     if(checkWin(block)) {
                         gameView.setPlayerturnText("Player 1 wins!");
+                        setGameOver(true, "Player 1");
                         gameView.endGame();
                     } else if(movesLeft==0) {
                         gameView.setPlayerturnText(GAME_END_NOWINNER);
+                        setGameOver(true, "Draw");
                     }
                 }
             } else if(block==gameView.getGuiBlock(0,1)) {
@@ -93,9 +98,11 @@ public class GameController {
                 if(movesLeft<7) {
                     if(checkWin(block)) {
                         gameView.setPlayerturnText("Player 1 wins!");
+                        setGameOver(true, "Player 1");
                         gameView.endGame();
                     } else if(movesLeft==0) {
                         gameView.setPlayerturnText(GAME_END_NOWINNER);
+                        setGameOver(true, "Draw");
                     }
                 }
             } else if(block==gameView.getGuiBlock(0,2)) {
@@ -106,9 +113,11 @@ public class GameController {
                 if(movesLeft<7) {
                     if(checkWin(block)) {
                         gameView.setPlayerturnText("Player 1 wins!");
+                        setGameOver(true, "Player 1");
                         gameView.endGame();
                     } else if(movesLeft==0) {
                         gameView.setPlayerturnText(GAME_END_NOWINNER);
+                        setGameOver(true, "Draw");
                     }
                 }
             } else if(block==gameView.getGuiBlock(1,0)) {
@@ -122,9 +131,11 @@ public class GameController {
                 if(movesLeft<7) {
                     if(checkWin(block)) {
                         gameView.setPlayerturnText("Player 1 wins!");
+                        setGameOver(true, "Player 1");
                         gameView.endGame();
                     } else if(movesLeft==0) {
                         gameView.setPlayerturnText(GAME_END_NOWINNER);
+                        setGameOver(true, "Draw");
                     }
                 }
             } else if(block==gameView.getGuiBlock(1,1)) {
@@ -138,9 +149,11 @@ public class GameController {
                 if(movesLeft<7) {
                     if(checkWin(block)) {
                         gameView.setPlayerturnText("Player 1 wins!");
+                        setGameOver(true, "Player 1");
                         gameView.endGame();
                     } else if(movesLeft==0) {
                         gameView.setPlayerturnText(GAME_END_NOWINNER);
+                        setGameOver(true, "Draw");
                     }
                 }
             } else if(block==gameView.getGuiBlock(1,2)) {
@@ -154,9 +167,11 @@ public class GameController {
                 if(movesLeft<7) {
                     if(checkWin(block)) {
                         gameView.setPlayerturnText("Player 1 wins!");
+                        setGameOver(true, "Player 1");
                         gameView.endGame();
                     } else if(movesLeft==0) {
                         gameView.setPlayerturnText(GAME_END_NOWINNER);
+                        setGameOver(true, "Draw");
                     }
                 }
             } else if(block==gameView.getGuiBlock(2, 0)) {
@@ -170,9 +185,11 @@ public class GameController {
                 if(movesLeft<7) {
                     if(checkWin(block)) {
                         gameView.setPlayerturnText("Player 1 wins!");
+                        setGameOver(true, "Player 1");
                         gameView.endGame();
                     } else if(movesLeft==0) {
                         gameView.setPlayerturnText(GAME_END_NOWINNER);
+                        setGameOver(true, "Draw");
                     }
                 }
             } else if(block==gameView.getGuiBlock(2, 1)) {
@@ -186,9 +203,11 @@ public class GameController {
                 if(movesLeft<7) {
                     if(checkWin(block)) {
                         gameView.setPlayerturnText("Player 1 wins!");
+                        setGameOver(true, "Player 1");
                         gameView.endGame();
                     } else if(movesLeft==0) {
                         gameView.setPlayerturnText(GAME_END_NOWINNER);
+                        setGameOver(true, "Draw");
                     }
                 }
             } else if(block==gameView.getGuiBlock(2, 2)) {
@@ -202,9 +221,11 @@ public class GameController {
                 if(movesLeft<7) {
                     if(checkWin(block)) {
                         gameView.setPlayerturnText("Player 1 wins!");
+                        setGameOver(true, "Player 1");
                         gameView.endGame();
                     } else if(movesLeft==0) {
                         gameView.setPlayerturnText(GAME_END_NOWINNER);
+                        setGameOver(true, "Draw");
                     }
                 }
             }
@@ -218,9 +239,11 @@ public class GameController {
                 if(movesLeft<7) {
                     if(checkWin(block)) {
                         gameView.setPlayerturnText("Player 2 wins!");
+                        setGameOver(true, "Player 2");
                         gameView.endGame();
                     } else if(movesLeft==0) {
                         gameView.setPlayerturnText(GAME_END_NOWINNER);
+                        setGameOver(true, "Draw");
                     }
                 }
             } else if(block==gameView.getGuiBlock(0,1)) {
@@ -231,9 +254,11 @@ public class GameController {
                 if(movesLeft<7) {
                     if(checkWin(block)) {
                         gameView.setPlayerturnText("Player 2 wins!");
+                        setGameOver(true, "Player 2");
                         gameView.endGame();
                     } else if(movesLeft==0) {
                         gameView.setPlayerturnText(GAME_END_NOWINNER);
+                        setGameOver(true, "Draw");
                     }
                 }
             } else if(block==gameView.getGuiBlock(0,2)) {
@@ -244,9 +269,11 @@ public class GameController {
                 if(movesLeft<7) {
                     if(checkWin(block)) {
                         gameView.setPlayerturnText("Player 2 wins!");
+                        setGameOver(true, "Player 2");
                         gameView.endGame();
                     } else if(movesLeft==0) {
                         gameView.setPlayerturnText(GAME_END_NOWINNER);
+                        setGameOver(true, "Draw");
                     }
                 }
             } else if(block==gameView.getGuiBlock(1,0)) {
@@ -260,9 +287,11 @@ public class GameController {
                 if(movesLeft<7) {
                     if(checkWin(block)) {
                         gameView.setPlayerturnText("Player 2 wins!");
+                        setGameOver(true, "Player 2");
                         gameView.endGame();
                     } else if(movesLeft==0) {
                         gameView.setPlayerturnText(GAME_END_NOWINNER);
+                        setGameOver(true, "Draw");
                     }
                 }
             } else if(block==gameView.getGuiBlock(1,1)) {
@@ -276,9 +305,11 @@ public class GameController {
                 if(movesLeft<7) {
                     if(checkWin(block)) {
                         gameView.setPlayerturnText("Player 2 wins!");
+                        setGameOver(true, "Player 2");
                         gameView.endGame();
                     } else if(movesLeft==0) {
                         gameView.setPlayerturnText(GAME_END_NOWINNER);
+                        setGameOver(true, "Draw");
                     }
                 }
             } else if(block==gameView.getGuiBlock(1,2)) {
@@ -292,9 +323,11 @@ public class GameController {
                 if(movesLeft<7) {
                     if(checkWin(block)) {
                         gameView.setPlayerturnText("Player 2 wins!");
+                        setGameOver(true, "Player 2");
                         gameView.endGame();
                     } else if(movesLeft==0) {
                         gameView.setPlayerturnText(GAME_END_NOWINNER);
+                        setGameOver(true, "Draw");
                     }
                 }
             } else if(block==gameView.getGuiBlock(2, 0)) {
@@ -308,9 +341,11 @@ public class GameController {
                 if(movesLeft<7) {
                     if(checkWin(block)) {
                         gameView.setPlayerturnText("Player 2 wins!");
+                        setGameOver(true, "Player 2");
                         gameView.endGame();
                     } else if(movesLeft==0) {
                         gameView.setPlayerturnText(GAME_END_NOWINNER);
+                        setGameOver(true, "Draw");
                     }
                 }
             } else if(block==gameView.getGuiBlock(2, 1)) {
@@ -324,9 +359,11 @@ public class GameController {
                 if(movesLeft<7) {
                     if(checkWin(block)) {
                         gameView.setPlayerturnText("Player 2 wins!");
+                        setGameOver(true, "Player 2");
                         gameView.endGame();
                     } else if(movesLeft==0) {
                         gameView.setPlayerturnText(GAME_END_NOWINNER);
+                        setGameOver(true, "Draw");
                     }
                 }
             } else if(block==gameView.getGuiBlock(2, 2)) {
@@ -340,9 +377,11 @@ public class GameController {
                 if(movesLeft<7) {
                     if(checkWin(block)) {
                         gameView.setPlayerturnText("Player 2 wins!");
+                        setGameOver(true, "Player 2");
                         gameView.endGame();
                     } else if(movesLeft==0) {
                         gameView.setPlayerturnText(GAME_END_NOWINNER);
+                        setGameOver(true, "Draw");
                     }
                 }
             }
@@ -445,6 +484,46 @@ public class GameController {
     }
 
     /**
+     * Gets the current player
+     *
+     * @return String identifiying the current player
+     */
+    public String getPlayer() {
+        return player;
+    }
+
+    /**
+     * Gets the number of moves left
+     *
+     * @return int identifiying the number of moves left
+     */
+    public int getNumMovesLeft() {
+        return gameData.getMovesLeft();
+    }
+
+    /**
+     * Allows for the ability to pick a square programattically, as opposed to the GUI
+     *
+     * @param row the row of the chosen block
+     * @param col the col of the chosen block
+     * @return boolean[] array of len 2 identifiying whether or not the move was successful, and whether the game has ended
+     */
+    public boolean[] chooseBlock(int row, int col) {
+        boolean[] returnArray = {false, false};
+        if (! gameData.isBlockLegalMove(row,col)) {
+            return returnArray;
+        }
+
+        move(gameView.getGuiBlock(row,col));
+        returnArray[0] = true;
+
+        if (gameOver) {
+            returnArray[1] = true;
+        }
+        return returnArray;
+    }
+
+    /**
      * Updates the block at the given row and col
      * after one of the player's moves.
      *
@@ -480,4 +559,34 @@ public class GameController {
     public void setGuiVisibility(boolean isVisible) {
         gameView.setGuiVisibility(isVisible);
     }
+
+    /**
+     * Sets the gameOver property
+     *
+     * @param isOver Sets whether or not the game is over
+     * @param winner Sets who won the game
+     */
+    private void setGameOver(boolean isOver, String winner) {
+        this.winner = winner;
+        gameOver = isOver;
+    }
+
+    /**
+     * Get the gameOver property
+     *
+     * @return boolean Returns whether or not the game has ended
+     */
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    /**
+     * Get the winner property
+     *
+     * @Return String the player that has won the game, or GAME_END_NOWINNER
+     */
+    public String getWinner() {
+        return winner;
+    }
+
 }

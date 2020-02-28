@@ -111,12 +111,30 @@ public class GameView {
     }
 
     /**
-     * Set the Jtextarea playerturn string contents
+     * Get the Jtextarea playerturn string contents
+     *
+     * @return String The text in the playerturn property
+     */
+    public String getPlayerturnText() {
+        return playerturn.getText();
+    }
+
+    /**
+     * Sets the visibility of the GUI
      *
      * @param isVisible Sets the visibility of the view
      */
     public void setGuiVisibility(boolean isVisible) {
         gui.setVisible(isVisible);
+    }
+
+    /**
+     * Gets the visibility of the GUI
+     *
+     * @return boolean Whether or not the GUI is visible
+     */
+    public boolean getGuiVisibility() {
+        return gui.isDisplayable();
     }
 
 }

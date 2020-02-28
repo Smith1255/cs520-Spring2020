@@ -9,6 +9,7 @@ public class GameModel {
     private int movesLeft;
 
 
+
     /**
      * Creates a new game model.
      */
@@ -75,6 +76,8 @@ public class GameModel {
      * @return int Number of moves left minus one
      */
     public int decrementMovesLeft() {
+        if (movesLeft == 0) return 0;
+
         return --movesLeft;
     }
 

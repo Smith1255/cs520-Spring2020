@@ -1,0 +1,33 @@
+(a) Andrew Smith
+
+Compilation notes. Pretty sure this won't be affected on your end, but I compiled and ran on JDK-13 and the ant version that supported that. 
+
+(b) code review comments
+
+1. 
+	• D.R.Y., extensibility, testability, readability
+	• Much of the code in move() is repeated and leads to unreadable and untestable (or atleast is hard to test)
+	• Write functions that help cut down on the number of lines. This includes generalizing and condensing a lot of the logic in move(). To completely fix and define move() would be more work than necessary in the scope of the assignment, so I just rewrote the win-check logic and placed it in the checkWin function, cutting down on ~100 lines of redundant code. 
+2. 
+	• Encapsulation issue 
+	• The block object should not be aware of the games existence nor have access to the game object itself. This includes passing in the game object into its constructor as well as having methods pertaining to the game object (within game block)
+	• Remove the game property. Remove the game parameter, the super() call, and the game object null check in the constructor. Remove the getGame() function.
+3. 
+	• Incorrect variable check (content vs value in setContents())
+	• In the method setContents(), there is a check for null on the contents variable. The parameter passed in is value, and the object property is contents. Therefore, it makes no sense to check if contents is null (as contents should be instantiated in the constructor) and not value.
+	• Check value==null instead. Optionally (which I did not do), check if contents already value and throw an exception for trying to do an illegal move. The tests have to be updated as well.
+4. 
+	• Constructor issue + poor design choices (game block)
+	• The block constructor does not instantiate the contents and isValid properties. Further, the game class should not be initializing the properties of the block unless they differ from what is expected (I.e setting contents to something else other than "").
+	• Initialize both properties in the block class, and remove the setContents and setIsLegalMove function calls from the game constructor (unless specific/uniquely called).
+	
+(c) description of the Observer design pattern
+	Every time the board model is changed, the view needs to be updated. Therefore, it reasons, that the view would be a good observer object. It observes the model, and given a change to the underlying game state, updates the view accordingly. Specifically, the update() method in view could be implemented as an observer method instead of directly calling it from the controller.
+
+(d) description of the proposed extension to the game board
+
+I think the first change that would need to be made, regardless of an extension, would be to generalize the 'winCheck' algorithm (as opposed to hardcoding the logic for each case). Included this would be the move() function, which is also hardcoded and could be generalized. Generalizing this would make extending the board size far easier, because you wouldn't need to A) wrestle with the spaghetti algorithm and B) have to add even more cases in the hardcode. 
+
+Any 2d array representing the board (gameBlocks and viewBlocks) would need to be generalized to be instantiated as an n*m (n,m>=3) array as opposed to 3*3. Further, all of the loops would need to be generalized to run over col.len and row.len, instead of explicit values (i.e. 3). 
+
+Smaller things would include dynamically sizing the board in the View and dynamically calculating movesLeft. Additionally, you would need a concrete, and general, rule for what spaces are available at the start (as opposed to just row=last, unless thats what you want).
